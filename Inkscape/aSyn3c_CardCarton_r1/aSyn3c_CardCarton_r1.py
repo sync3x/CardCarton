@@ -6,7 +6,7 @@
 ##  https://www.asyn3c.net/cardcarton/                         ##
 ##_____________________________________________________________##
 
-from __future__ import division
+from __future__ import division # python 3 provides true division by default #https://peps.python.org/pep-0238/ # was found in a scribus script
 idstamping={'net.asyn3c.','inkscape.carton.','rev.0001.','ver.2023.04.09'}
 
 ## CONDENSE BUNDLED LIB NAME ##
@@ -28,6 +28,7 @@ from lxml import etree as _x###
 from collections import ChainMap
 ## THIRD PARTY LIB PATH ################
 sys.path.append('/usr/share/inkscape/extensions')
+sys.path.append('/usr/share/scribus/scripts')
 ########################################
 ## THIRD PARTY LIB INCLUSION ###########
 
@@ -37,12 +38,14 @@ try:
   import simplestyle as _inx_s
   #import pages as _pag
 except ImportError as err:
-  print("No Inkscape")
+  pass
+  #print("No Inkscape")
 
 try:
   import scribus
 except ImportError as err:
-  print ("No Scribus")
+  pass
+  #print ("No Scribus")
 
 ########################################
 ## CLASSES FOLLOW FROM HERE ############
@@ -55,7 +58,8 @@ class aSyn3c91(_inx.Effect):
         __._option_ = None # options as an object
         __._ = None # options as a hash
         __._root_ = None # document root
-        __._page_ = None # page/layer
+        __._page_ = None # document page
+        __._register_ = None # grouplayer/outer
         __._geom_ = None # vector/inner
         __._stylesheet_ = None # style
 
@@ -102,27 +106,25 @@ class aSyn3c91(_inx.Effect):
 
 
     def affect(__):
+        __._root_ = __.document.getroot()
+        __._page_ = __.svg.get_current_layer()
+
         ##https://wiki.inkscape.org/wiki/Generating_objects_from_extensions
         #parent = myself.svg.get_current_layer()
         ##https://www.linux-magazine.com/Issues/2020/239/Magic-Circle
         #option = myself.options
 
-        ##
-        __._root_ = __.document.getroot()
-        # modified for Inkscape UI upgrade from 0.9x to 1.1x
-        __._page_ = __.svg.get_current_layer()
-        # 0.92
-        #__._book_ = __.createMultiPageDocument()
-
         # Every new document comes with a potentially unwanted 'layer1'.
         # Seriously, what are we going to do about that?
-        for element in __._root_.iter(tag=_x.Element):
-          if element.eid[0:6]=='layer1': # find this default layer of all documents
-          #if len(element.getchildren()) == 0: # check that there is no art in this layer
-          #  element.getparent().remove(element) # obviously unused in this dieline! bugger off!
+        # I can't remove it automatically because I will setup inkscape to crash if I try;
+        # however, I can definitely remove layers I previously created.
 
-            pass # The above, while predictably functional, removes the SVG root and crashes inkscape.
-            # I need a cleaner method of purging this default layer.
+        for element in __._root_.iter(tag=_x.Element):
+          if element.eid[0:12]=='rootregister': # find the old registration mark
+            element.getparent().remove(element) # bugger off! we will recreate these marks, every time.
+
+        # The above, while predictably functional, removes the SVG root and crashes inkscape.
+        # I need a cleaner method of purging this default layer.
 
             #if (
             #  element != __.document.getroot() and
@@ -213,22 +215,25 @@ class aSyn3c91(_inx.Effect):
 
           diag = _x.SubElement(__._page_, _inx.addNS('path','svg'), attribs )
         
-        elif __._['q_0all_plot_register']=='3':
-         woot=__.document.getroot() # All three must be used together to maintain scale!!!
-         xxxx=float(woot.get('width')[:-2])
-         yyyy=float(woot.get('height')[:-2])
+        elif __._['q_0all_plot_register']=='2' or __._['q_0all_plot_register']=='3':
+         xxxx=float(__._root_.get('width')[:-2]) # trim 'mm'
+         yyyy=float(__._root_.get('height')[:-2]) # trim 'mm'
+         __._register_ = __._root_.add(_inx.Group()) # make a new group at entity level
+         __._register_.set('id', 'rootregister') #__.svg.get_unique_id('iz--')
+         __._register_.set(_inx.addNS('label', 'inkscape'),'Regmarks')
+         _style=('q_register_kongsberg_1' if __._['q_0all_plot_register']=='3' else 'q_register_brother_1')
          for yy in range(2):
           for xx in range(2):
            ##https://www.linux-magazine.com/Issues/2020/239/Magic-Circle
            attribs = {
-             'style': str(_inx.Style(__._stylesheet_['q_register_kongsberg_1'])),
-             _inx.addNS('label', 'inkscape'): "q_register_kongsberg_1"+
+             'style': str(_inx.Style(__._stylesheet_[_style])),
+             _inx.addNS('label', 'inkscape'): _style+
              '_{0:1X}_{1:1X}'.format(yy,xx),
              'cx': str(10+((xxxx*xx)-(20*xx))),
              'cy': str(10+((yyyy*yy)-(20*yy))),
              'r': '6.0'
            }
-           __._page_.add(_inx.Circle (**attribs))
+           __._register_.add(_inx.Circle (**attribs))
            if __.debug[0] or __.debug[1]: _inx.utils.debug([
              ['rego',__._['q_0all_plot_register'],],
              [yy,xx],[
@@ -236,6 +241,7 @@ class aSyn3c91(_inx.Effect):
                (yyyy*yy),
              ],
            ])
+
           
         
     def iffect_2(__, requests):
@@ -295,20 +301,25 @@ class aSyn3c91(_inx.Effect):
 
         ##https://inkscape.org/~MarioVoigt/%E2%98%85ungrouper-and-element-migratorfilter
         _layer = __.document.getroot().add(_inx.Group()) # make a new group at root level
-        _layer.set('id', 'item-'+str(item00)) #__.svg.get_unique_id('iz--')
         _layer.set(_inx.addNS('groupmode', 'inkscape'), 'layer') # Layers are at the top level only!
+        _layer.set('id', 'item-'+str(item00)) #__.svg.get_unique_id('iz--')
+        _layer.set(_inx.addNS('label', 'inkscape'),'Item '+str(item00))
 
         _regi_ = _layer.add(_inx.Group()) # make a new group at entity level
         _regi_.set('id', 'regi-'+str(item00)) #__.svg.get_unique_id('iz--')
+        _regi_.set(_inx.addNS('label', 'inkscape'),'Regmarks')
 
         _diag_ = _layer.add(_inx.Group()) # make a new group at entity level
         _diag_.set('id', 'diag-'+str(item00)) #__.svg.get_unique_id('iz--')
+        _diag_.set(_inx.addNS('label', 'inkscape'),'Plot')
 
         _fold_ = _layer.add(_inx.Group()) # make a new group at entity level
         _fold_.set('id', 'fold-'+str(item00)) #__.svg.get_unique_id('iz--')
+        _fold_.set(_inx.addNS('label', 'inkscape'),'Crease')
 
         _chop_ = _layer.add(_inx.Group()) # make a new group at entity level
         _chop_.set('id', 'chop-'+str(item00)) #__.svg.get_unique_id('iz--')
+        _chop_.set(_inx.addNS('label', 'inkscape'),'Full Cut')
 
         _doug_ = _diag_
         _rogi_ = _regi_
@@ -1427,12 +1438,12 @@ class aSyn3c91(_inx.Effect):
     def uffect_1(__, list00): # 1 piece
       iz=0
       #__.groupindex=0
-      woot=__.document.getroot() # All three must be used together to maintain scale!!!
+      # All three .set()s following must be used together to maintain scale!!!
       xx= __.z1carton['GRID'][iz][ len(__.z1carton['GRID'][iz])-1 ][0] + (2*__.z1carton['GRID'][iz][0][0])
       yy= __.z1carton['GRID'][iz][ len(__.z1carton['GRID'][iz])-1 ][1] + (2*__.z1carton['GRID'][iz][0][1])
-      woot.set('width',str(xx)+"mm")
-      woot.set('height',str(yy)+"mm")
-      woot.set('viewBox', '0 0 %.0f %.0f' % (xx, yy))
+      __._root_.set('width',str(xx)+"mm")
+      __._root_.set('height',str(yy)+"mm")
+      __._root_.set('viewBox', '0 0 %.0f %.0f' % (xx, yy))
       for iz in range(len(__.z1carton['Enable'])):
       #  ##https://inkscape.org/forums/extensions/extension-access-children-of-layer/
       #  ##https://github.com/wvengen/inkscape-addons/blob/master/extensions/multi_page_pdf_output.py
@@ -1635,12 +1646,12 @@ class aSyn3c91(_inx.Effect):
 
     def uffect_3(__, list00): # Insert
         qZ=0
-        woot=__.document.getroot() # All three must be used together to maintain scale!!!
+        # All three .set()s following must be used together to maintain scale!!!
         xx= (__.z0job0['offset'][qZ][0]*2) + __.z3insert['Li'][qZ]
         yy= (__.z0job0['offset'][qZ][1]*2) + ( ( __.z3insert['Hi'][qZ] + __.z3insert['Wi'][qZ] )*2 )+__._['q_tab_glue_diameter']
-        woot.set('width',str(xx)+"mm")
-        woot.set('height',str(yy)+"mm")
-        woot.set('viewBox', '0 0 %.0f %.0f' % (xx, yy))
+        __._root_.set('width',str(xx)+"mm")
+        __._root_.set('height',str(yy)+"mm")
+        __._root_.set('viewBox', '0 0 %.0f %.0f' % (xx, yy))
 
         __.uffect_0( __.z3insert['PLAN'], 0 )
 
@@ -1830,12 +1841,12 @@ class aSyn3c91(_inx.Effect):
         #zZ=int(__.z5outset['Quantity'][qZ])-1
         #qZdeep, qZflap= float(__.z5outset['Height'][qZ]), __.z5outset['Wid'][qZ]/2
         #qZdeeper=((qZflap*2)+qZdeep)*zZ
-        woot=__.document.getroot() # All three must be used together to maintain scale!!!
+        # All three .set()s following must be used together to maintain scale!!!
         xx= __.z5outset['GRID'][qZ][0] + ( ( __.z5outset['Len'][qZ] + __.z5outset['Wid'][qZ] )*2 ) + (20) + ( __.z0job0['offset'][0][0]*1 )
         yy= __.z5outset['GRID'][qZ][1] + ( ( __.z5outset['Wid'][qZ] + float(__.z5outset['Height'][qZ]) ) * int(__.z5outset['Quantity'][qZ]) ) + ( __.z0job0['offset'][0][1]*1 )
-        woot.set('width',str(xx)+"mm")
-        woot.set('height',str(yy)+"mm")
-        woot.set('viewBox', '0 0 %.0f %.0f' % (xx, yy))
+        __._root_.set('width',str(xx)+"mm")
+        __._root_.set('height',str(yy)+"mm")
+        __._root_.set('viewBox', '0 0 %.0f %.0f' % (xx, yy))
         ##https://inkscape.org/forums/extensions/extension-access-children-of-layer/
         ##https://github.com/wvengen/inkscape-addons/blob/master/extensions/multi_page_pdf_output.py
 
