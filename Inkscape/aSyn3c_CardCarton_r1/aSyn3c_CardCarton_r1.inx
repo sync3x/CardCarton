@@ -1,0 +1,1956 @@
+<?xml version="1.0" encoding="UTF-8"                               ?>
+<!--  Released under the GNU General Public License, version 3.  !-->
+<!--  For collaboration, write to cardcarton at asyn3c dot net.  !-->
+<!--_____________________________________________________________!-->
+<!--  https://www.asyn3c.net/cardcarton/                         !-->
+<!--_____________________________________________________________!-->
+
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <!--= my guide: https://www.linux-magazine.com/Issues/2020/239/Magic-Circle ==-->
+  <name>CardCarton rev.1</name>
+  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.04.09</id>
+
+  <param type="int"
+   name="historyfader01"
+   gui-text="Previous appearance fader:"
+   min="0" max="15"
+   appearance="full">0</param>
+  <hbox>
+  <label>Current</label>
+  <spacer size="expand" />
+  <label>Previous</label>
+  </hbox>
+
+  <spacer size="12" />
+
+  <param name="tab0" type="notebook">
+
+<!-- |||||||||||||||||||||||||||||||||||||||| !-->
+
+  <page name="z0alltab" gui-text="All settings">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">All jobs as follows:</label>
+        <spacer size="expand" />
+      </hbox>
+
+      <param name="z_0all_c" type="notebook">
+
+      <page name="z_0all_51" gui-text="General">
+      <spacer size="16" />
+      <label appearance="header">Geometry:</label>
+      <hbox>
+      <spacer size="20" />
+      <param type="optiongroup" name="q_0all_measure_absolute" appearance="combo"
+        gui-text="Unit of absolute measurement:">
+          <option value="um">Micrometers</option>
+          <option value="mm">Millimeters</option>
+          <option value="px">Pixels (SVG)</option>
+          <option value="pt">Points (PostScript)</option>
+      </param>
+      </hbox>
+      <hbox>
+      <spacer size="20" />
+      <param type="optiongroup" name="q_0all_measure_relative" appearance="combo"
+        gui-text="Unit of relative scale:">
+          <option value="pm">Permille</option>
+          <option value="pc">Percent</option>
+          <!--option value="fc">Fraction</option!-->
+      </param>
+      </hbox>
+      <spacer size="48" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">About</label>
+        <spacer size="expand" />
+      </hbox>
+      <hbox>
+        <spacer size="expand" />
+        <vbox>
+          <spacer size="16" />
+          <label>CardCarton rev.1</label>
+        </vbox>
+        <spacer size="expand" />
+      </hbox><hbox>
+        <spacer size="expand" />
+        <vbox>
+          <spacer size="4" />
+          <label>by, "Mr Andrew Sinclair"</label>
+          <label>&lt;cardcarton at asyn3c dot net&gt;</label>
+          <label>https://www.asyn3c.net/cardcarton/</label>
+        </vbox>
+        <spacer size="expand" />
+      </hbox><hbox>
+        <spacer size="expand" />
+        <vbox>
+          <spacer size="4" />
+          <label>
+          This extension renders wireframe cut &amp; crease models for cardstock packaging.
+          </label>
+          <label>
+          This is revision 1. It is a proof of concept.
+          </label>
+          <label>
+          The carton design is pegged to an internal asymmetric grid; irregularly spaced axis but with the same number of horizontal and vertical divisions. We can refer to the centre of the cube as 3,3.
+          As a diagnostic feature, and to speed up plotting when iterative samples are required, flat cartons can be drawn as either half of a cube or the full cube.
+          </label>
+          <label>
+          The following will be in revision 2.
+          The number of vertical and horizontal divisions on the internal grid will no longer match.
+          The half-cube diagnostic drawing function will be converted into a split-cube facility; that is, when selected the software will render two opposing pieces that can be glued together as though they were always one piece.
+          Glue tabs can be on either the left or right side; two will be present if a split-cube is selected.
+          </label>
+        </vbox>
+        <spacer size="expand" />
+      </hbox>
+      </page>
+
+      <page name="z_0all_52" gui-text="Special">
+       <param type="string" name="q_c_contact1" gui-text="Name:"></param>
+       <param type="string" name="q_c_contact2" gui-text="URL:"></param>
+       <param type="string" name="q_c_contact3" gui-text="E-Mail:"></param>
+       <param type="string" name="q_c_contact4" gui-text="Telephone:"></param>
+       <!--hbox>
+        <param type="string" name="q_crease_lid_hinge_outset" gui-text="crease_lid_hinge_outset">0.5</param>
+        <param type="string" name="q_crease_lid_flap_inset" gui-text="crease_lid_flap_inset">1.0</param>
+       </hbox><hbox>
+        <param type="string" name="q_tab_glue_diameter" gui-text="tab_glue_diameter">12.0</param>
+        <param type="string" name="q_tab_glue_taper" gui-text="tab_glue_taper">4.0</param>
+       </hbox-->
+      </page>
+
+      <page name="z_0all_53" gui-text="Screen colour:">
+       <hbox>
+        <param name="q_col1_cre2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">0.250</param>
+        <param name="q_col1_cre3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">1.0</param>
+       </hbox><hbox>
+        <param name="q_col1_cre1" type="color" gui-text="Fold line:" appearance="colorbutton">0x00FFFFff</param>
+        <spacer size="15" />
+        <param name="q_col1_cre4" type="color" gui-text="Glue Fold:" appearance="colorbutton">0x0000FFff</param>
+        <spacer size="15" />
+        <param name="q_col1_cre5" type="color" gui-text="Base fold:" appearance="colorbutton">0x00FFFFff</param>
+        <param name="q_col1_cre8" type="color" gui-text="Flap fold:" appearance="colorbutton">0x00FFFFff</param>
+       </hbox><hbox>
+        <spacer size="15" />
+        <param name="q_col1_cre6" type="color" gui-text="Lid fold:" appearance="colorbutton">0x00FFFFff</param>
+        <param name="q_col1_cre7" type="color" gui-text="Tab fold:" appearance="colorbutton">0x00FFFFff</param>
+        <param name="q_col1_cre9" type="color" gui-text="Window fold:" appearance="colorbutton">0x00FFFFff</param>
+        <param name="q_col1_creA" type="color" gui-text="Insert fold:" appearance="colorbutton">0x00FFFFff</param>
+       </hbox><spacer size="3" /><hbox>
+        <param name="q_col1_cut2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">0.125</param>
+        <param name="q_col1_cut3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">1.0</param>
+       </hbox><hbox>
+        <param name="q_col1_cut1" type="color" gui-text="Chop line:" appearance="colorbutton">0xFF00FFff</param>
+        <spacer size="15" />
+        <param name="q_col1_cut7" type="color" gui-text="Glue Chop:" appearance="colorbutton">0xFF0000ff</param>
+        <spacer size="15" />
+        <param name="q_col1_cut4" type="color" gui-text="Outer:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cut8" type="color" gui-text="Inner:" appearance="colorbutton">0xFF00FFff</param>
+       </hbox><hbox>
+        <spacer size="15" />
+        <param name="q_col1_cut5" type="color" gui-text="OutLidd:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cut9" type="color" gui-text="InnTabb:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cut6" type="color" gui-text="OutFlap:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutC" type="color" gui-text="OutWindow:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutD" type="color" gui-text="OutInsert:" appearance="colorbutton">0xFF00FFff</param>
+       </hbox><hbox>
+        <spacer size="15" />
+        <param name="q_col1_cutA" type="color" gui-text="InWindow:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutB" type="color" gui-text="InInsert:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutE" type="color" gui-text="Pc1:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutF" type="color" gui-text="Pc2:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutG" type="color" gui-text="Pc3:" appearance="colorbutton">0xFF00FFff</param>
+        <param name="q_col1_cutH" type="color" gui-text="Pc4:" appearance="colorbutton">0xFF00FFff</param>
+       </hbox><spacer size="3" /><hbox>
+        <param name="q_col1_reg2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">1.0</param>
+        <param name="q_col1_reg3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">0.8</param>
+       </hbox><hbox>
+        <param name="q_col1_reg1" type="color" gui-text="Registration:" appearance="colorbutton">0x97B723ff</param>
+        <spacer size="15" />
+        <param name="q_col1_reg4" type="color" gui-text="Text:" appearance="colorbutton">0x97B723ff</param>
+       </hbox><spacer size="3" /><hbox>
+        <param name="q_col1_dia2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">0.25</param>
+        <param name="q_col1_dia3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">0.8</param>
+       </hbox><hbox>
+        <param name="q_col1_dia1" type="color" gui-text="Diagnostic:" appearance="colorbutton">0x00FF00ff</param>
+        <spacer size="15" />
+        <param name="q_col1_dia4" type="color" gui-text="Text:" appearance="colorbutton">0x00FF00ff</param>
+       </hbox>
+      </page>
+      <page name="z_0all_54" gui-text="Page colour:">
+       <hbox>
+        <param name="q_col2_cre2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">0.5</param>
+        <param name="q_col2_cre3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">0.8</param>
+       </hbox><hbox>
+        <param name="q_col2_cre1" type="color" gui-text="Fold line:" appearance="colorbutton">0x00FFFFff</param>
+        <spacer size="15" />
+        <param name="q_col2_cre4" type="color" gui-text="Glue Fold:" appearance="colorbutton">0x00FFFFff</param>
+       </hbox><spacer size="3" /><hbox>
+        <param name="q_col2_cut2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">0.25</param>
+        <param name="q_col2_cut3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">0.8</param>
+       </hbox><hbox>
+        <param name="q_col2_cut1" type="color" gui-text="Chop line:" appearance="colorbutton">0xFF00FFff</param>
+        <spacer size="15" />
+        <param name="q_col2_cut4" type="color" gui-text="Glue Chop:" appearance="colorbutton">0xFF00FFff</param>
+       </hbox><spacer size="3" /><hbox>
+        <param name="q_col2_reg2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">1.0</param>
+        <param name="q_col2_reg3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">0.8</param>
+       </hbox><hbox>
+        <param name="q_col2_reg1" type="color" gui-text="Registration:" appearance="colorbutton">0x97B723ff</param>
+        <spacer size="15" />
+        <param name="q_col2_reg4" type="color" gui-text="Text:" appearance="colorbutton">0x97B723ff</param>
+       </hbox><spacer size="3" /><hbox>
+        <param name="q_col2_dia2" type="float" gui-text="diameter:" min="0.1" max="3" precision="3" appearance="full">0.25</param>
+        <param name="q_col2_dia3" type="float" gui-text="opacity:" min="0.1" max="1.0" precision="3" appearance="full">0.8</param>
+       </hbox><hbox>
+        <param name="q_col2_dia1" type="color" gui-text="Diagnostic:" appearance="colorbutton">0x00FF00ff</param>
+        <spacer size="15" />
+        <param name="q_col2_dia4" type="color" gui-text="Text:" appearance="colorbutton">0x00FF00ff</param>
+       </hbox>
+      </page>
+      </param>
+
+      <!--label appearance="url" ##NEEDS URL PARAM## >https://asyn3c.net/CardCarton/ </label-->
+  </page>
+
+<!-- ======================================== !-->
+
+  <page name="z0jobtab" gui-text="Job settings">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">This job as follows:</label>
+        <spacer size="expand" />
+      </hbox>
+
+      <param name="z_0job_c" type="notebook">
+
+      <page name="z_0job_51" gui-text="General">
+      <!--spacer size="16" /-->
+      <hbox>
+      <label appearance="header">Dog number:</label>
+      <param type="string" name="q_00dognum_01user"
+             gui-text=""
+             gui-description="Job Number" ></param>
+      <label appearance="header">Design number:</label>
+      <param type="string" name="q_00desnum_03user"
+             gui-text=""
+             gui-description="Design Number" ></param>
+      </hbox><hbox>
+      <label appearance="header">Cat code:</label>
+      <param type="string" name="q_00catnum_02user"
+             gui-text=""
+             gui-description="Customer's Catalogue Code" ></param>
+      <label appearance="header">Squash code:</label>
+      <param type="string" name="q_00kninum_04user"
+             gui-text=""
+             gui-description="Fabricator's Knife Code" ></param>
+      </hbox>
+      <spacer size="16" />
+      <label appearance="header">Media type:</label>
+      <hbox>
+      <param type="optiongroup" name="q_0all_medium_type" appearance="combo"
+        gui-text="Material type:">
+          <option value="paper">Card</option>
+          <option value="boxboard">Box Board</option>
+          <option value="paperflute">Card Flute</option>
+          <option value="plasticflute">Plastic Flute</option>
+      </param>
+      <param type="optiongroup" name="q_0all_medium_cali" appearance="combo"
+        gui-text="Micrometer Caliper:">
+        <!--!-->
+          <option value="100">Paper White 100 ( 80gsm)</option>
+          <option value="150">Paper White 150 (120gsm)</option>
+        <!--!-->
+          <option value="225">Kodak Matte 225 (180gsm)</option>
+          <option value="275">Kodak Gloss 275 (240/280gsm)</option>
+        <!--  https://products.ballanddoggett.com.au/brands/barry-bleach-board/?context=boards  !-->
+          <option value="360">Barry White 360 (235gsm)</option>
+          <option value="400">Barry White 400 (255gsm)</option>
+          <option value="450">Barry White 450 (280gsm)</option>
+          <option value="500">Barry White 500 (305gsm)</option>
+          <option value="550">Barry White 550 (330gsm)</option>
+          <option value="600">Barry White 600 (355gsm)</option>
+        <!--  https://products.ballanddoggett.com.au/brands/hercules-greyback/?context=boards  !-->
+          <option value="645">Hercules Greyback 645 (500gsm)</option>
+          <option value="715">Hercules Greyback 715 (550gsm)</option>
+        <!--  https://www.starleaton.com.au/oppboga-outdoor  !-->
+          <option value="830">Oppboga Boxboard 830</option>
+          <option value="900">Oppboga Boxboard 900</option>
+        <!--!-->
+          <option value="1500">B-Flute 1500</option>
+          <option value="3000">E-Flute 3000</option>
+      </param>
+      </hbox>
+      <!--label> </label-->
+      <label appearance="header">Media size:</label>
+      <hbox>
+      <param type="string" name="q_0all_medium_x"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_0all_medium_y"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <label appearance="header">Drawing diagnostic:</label>
+      <hbox>
+      <param type="optiongroup" name="q_0all_area_amount" appearance="combo"
+        gui-text="Draw this much:">full
+          <option value="half">Half a cube</option>
+          <option value="full">The Full Cube</option>
+      </param>
+      </hbox><hbox>
+      <param type="optiongroup" name="q_0all_plot_register" appearance="combo"
+        gui-text="Registration Marks:">
+          <option value="0">No thanks</option>
+          <option value="1">Generic</option>
+          <option value="2">Brother Scan-N-Cut</option>
+          <option value="3">Esko Kongsberg</option>
+      </param>
+      <param type="optiongroup" name="q_0all_grid_type" appearance="combo"
+        gui-text="Components Grid:">
+          <option value="0">No thanks</option>
+          <option value="1">With guidelines</option>
+          <option value="2">With plotlines</option>
+          <option value="3">With creaselines</option>
+      </param>
+      </hbox>
+      <!--label> </label-->
+      <label appearance="header">Carton Margin:</label>
+      <hbox>
+      <param type="string" name="q_0all_origin_x"
+             gui-text="X:"
+             gui-description="" >5</param>
+      <param type="string" name="q_0all_origin_y"
+             gui-text="Y:"
+             gui-description="" >5</param>
+      </hbox>
+      <label appearance="header">Insert Margin:</label>
+      <hbox>
+      <param type="string" name="q_0all_offset_x"
+             gui-text="X:"
+             gui-description="" >5</param>
+      <param type="string" name="q_0all_offset_y"
+             gui-text="Y:"
+             gui-description="" >5</param>
+      </hbox>
+      </page>
+
+      <page name="z_0job_52" gui-text="Special">
+       <hbox>
+        <param type="optiongroup" name="debug0" appearance="combo" gui-text="debug0: log pre-process stroke data">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="optiongroup" name="debug1" appearance="combo" gui-text="debug1: log postprocess plot data">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+       </hbox><hbox>
+        <param type="optiongroup" name="debug2" appearance="combo" gui-text="debug2: label [M]ove co-ordinates">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+        <param type="optiongroup" name="debug3" appearance="combo" gui-text="debug3: circle [M]ove co-ordinates">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </param>
+       </hbox><hbox>
+        <param type="string" name="q_tab_glue_diameter" gui-text="tab_glue_diameter">12.0</param>
+        <param type="string" name="q_tab_glue_taper" gui-text="tab_glue_taper">4.0</param>
+       </hbox><hbox>
+        <param type="string" name="q_tab_glue_fold_reduction" gui-text="tab_glue_fold_reduction">0.50</param>
+        <param type="string" name="q_tab_glue_seam_reduction" gui-text="tab_glue_seam_reduction">0.75</param>
+       </hbox><hbox>
+        <param type="string" name="q_hang_tab_height" gui-text="hang_tab_height">40.0</param>
+        <param type="string" name="q_hang_pin_margin" gui-text="hang_pin_margin">5.0</param>
+       </hbox><!--hbox>
+        <param type="string" name="" gui-text=""></param>
+        <param type="string" name="" gui-text=""></param>
+       </hbox><hbox>
+        <param type="string" name="" gui-text=""></param>
+        <param type="string" name="" gui-text=""></param>
+       </hbox-->
+      </page>
+
+      <page name="z_0job_53" gui-text="ClipLock">
+       <hbox>
+        <param type="string" name="q_tab_lid_diameter" gui-text="tab_lid_diameter">15.0</param>
+        <param type="string" name="q_tab_lid_taper" gui-text="tab_lid_taper">8.0</param>
+       </hbox><hbox>
+        <param type="string" name="q_tab_lid_curve_diameter" gui-text="tab_lid_curve_diameter">0.8</param>
+        <param type="string" name="q_tab_lid_curve_taper" gui-text="tab_lid_curve_taper">0.8</param>
+       </hbox><hbox>
+        <param type="string" name="q_tab_dust_flap_reduction" gui-text="tab_dust_flap_reduction">1.00</param>
+        <param type="string" name="q_tab_dust_seam_reduction" gui-text="tab_dust_seam_reduction">0.25</param>
+       </hbox><hbox>
+        <param type="string" name="q_tab_lid_reduce" gui-text="tab_lid_reduce">1.0</param>
+        <param type="string" name="q_tab_dust_reduce" gui-text="tab_dust_reduce">0.0</param> <!--redundant!-->
+       </hbox><hbox>
+        <param type="string" name="q_tab_lid_flap_line" gui-text="tab_lid_flap_line">6.0</param>
+        <param type="string" name="q_tab_lid_flap_hook" gui-text="tab_lid_flap_hook">2.0</param>
+       </hbox><hbox>
+        <param type="string" name="q_crease_lid_hinge_outset" gui-text="crease_lid_hinge_outset">0.5</param>
+        <param type="string" name="q_crease_lid_flap_inset" gui-text="crease_lid_flap_inset">1.0</param>
+       </hbox>
+      </page>
+
+      <page name="z_0job_54" gui-text="TearLock">
+       <hbox>
+        <param type="string" name="q_zipp_buckle_major_parallel" gui-text="q_zipp_buckle_major_parallel">5</param>
+        <param type="string" name="q_zipp_buckle_minor_diagonal" gui-text="q_zipp_buckle_minor_diagonal">2</param>
+       </hbox><hbox>
+        <param type="string" name="q_zipp_buckle_up_spacing" gui-text="q_zipp_buckle_up_spacing">5</param>
+        <param type="string" name="q_zipp_buckle_dn_spacing" gui-text="q_zipp_buckle_dn_spacing">0</param>
+       </hbox>
+       <label>Spacing is the distance between the dangling ends of the minor diagonal tail. A theoretical zero would join these together;
+       it would not be a useful zipper as there is no longer a continuous strip to tear off.</label>
+       <label>In practice, zero spacing disables the zipper and hands you a base. Use this for the bottom of a tear-open carton.</label>
+      </page>
+
+      <page name="z_0job_55" gui-text="PushLock">
+       <hbox>
+        <param type="string" name="q_push_gap_major_axis" gui-text="q_push_gap_major_axis">0.5</param>
+        <param type="string" name="q_push_gap_minor_axis" gui-text="q_push_gap_minor_axis">3.0</param>
+       </hbox>
+      </page>
+
+      <page name="z_0job_56" gui-text="AutoLock">
+      </page>
+
+      <!--page name="z_0job_57" gui-text="FlatLock">
+      </page>
+
+      <page name="z_0job_58" gui-text="FullLock">
+      </page-->
+
+      <page name="z_0job_63" gui-text="Imposition">
+      </page>
+
+      <page name="z_0job_64" gui-text="Palletiser">
+      </page>
+
+      <!--page name="z_0job_65" gui-text="Insert">
+      </page>
+
+      <page name="z_0job_66" gui-text="Outset">
+      </page-->
+
+      </param>
+
+  </page>
+
+<!-- ======================================== !-->
+
+  <page name="z1carton_tab" gui-text="SoftCarton">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">One piece soft carton:</label>
+        <spacer size="expand" />
+      </hbox>
+
+      <param name="z_01pc_c" type="notebook">
+      <page name="z_01pc_u1_51" gui-text="Component #1">
+
+	      <hbox><param type="bool" name="q_01pc_u1_enable" gui-text="" appearance="header">true</param><label appearance="header">Component #1</label></hbox>
+	      <hbox>
+	      <spacer size="20" />
+	      <param type="string" name="q_01pc_u1_00L"
+		     gui-text="Length:"
+		     gui-description="" >80</param>
+	      <param type="string" name="q_01pc_u1_00W"
+		     gui-text="Width:"
+		     gui-description="" >40</param>
+	      <param type="string" name="q_01pc_u1_00H"
+		     gui-text="Height:"
+		     gui-description="" >80</param>
+	      </hbox>
+	      <hbox>
+	      <spacer size="20" />
+	      <vbox>
+	      <param type="optiongroup" name="q_01pc_u1_00_lidd" appearance="combo"
+		gui-text="Lid type:">
+		  <option value="c-lock">Clip lock</option>
+		  <!--option value="t-lock">Tear lock</option-->
+		  <!--option value="p-lock">Push lock</option-->
+		  <!--option value="a-lock">Auto lock</option-->
+		  <!--option value="f-lock">Flat lock</option-->
+		  <!--option value="u-lock">Full lock</option-->
+	      </param>
+	      <param type="optiongroup" name="q_01pc_u1_00_lidd_o" appearance="combo"
+		gui-text="Orient:">
+		  <option value="F">Forward</option>
+		  <option value="R">Reverse</option>
+	      </param>
+	      </vbox>
+	      <vbox>
+	      <param type="optiongroup" name="q_01pc_u1_00_base" appearance="combo"
+		gui-text="Base type:">
+		  <option value="c-lock">Clip lock</option>
+		  <!--option value="t-lock">Tear lock</option-->
+		  <option value="p-lock">Push lock</option>
+		  <!--option value="a-lock">Auto lock</option-->
+		  <!--option value="f-lock">Flat lock</option-->
+		  <!--option value="u-lock">Full lock</option-->
+	      </param>
+	      <param type="optiongroup" name="q_01pc_u1_00_base_o" appearance="combo"
+		gui-text="Orient:">
+		  <option value="F">Forward</option>
+		  <option value="R">Reverse</option>
+	      </param>
+	      </vbox>
+	      <param type="optiongroup" name="q_01pc_u1_00_flap" appearance="combo"
+		gui-text="Flap:">
+		  <option value="0">Flush</option>
+		  <option value="1">Relief</option>
+	      </param>
+	      <param type="optiongroup" name="q_01pc_u1_00_hang" appearance="combo"
+		gui-text="Hanger:">
+		  <option value="0">No</option>
+		  <option value="1">Obvious</option>
+	      </param>
+	      </hbox>
+	      <spacer size="8" />
+
+	      <param name="z_01pc_u1_g" type="notebook">
+	      <page name="z_01pc_u1_01" gui-text="Window geometry">
+		      <hbox><spacer size="15" /><label>Window #1 geometry -- lid</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_001"
+			     gui-text="X:"
+			     gui-description="" >8</param>
+		      <param type="string" name="q_01pc_u1_window_002"
+			     gui-text="Y:"
+			     gui-description="" >8</param>
+		      <param type="string" name="q_01pc_u1_window_003"
+			     gui-text="Curve:"
+			     gui-description="" >1</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #2 geometry -- front panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_101"
+			     gui-text="X:"
+			     gui-description="" >8</param>
+		      <param type="string" name="q_01pc_u1_window_102"
+			     gui-text="Y:"
+			     gui-description="" >8</param>
+		      <param type="string" name="q_01pc_u1_window_103"
+			     gui-text="Curve:"
+			     gui-description="" >2</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #3 geometry -- right panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_201"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_202"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_203"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #4 geometry -- rear panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_301"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_302"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_303"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #5 geometry -- left panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_401"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_402"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_403"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #6 geometry -- base (only when the type is tounge and/or clip lock)</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_501"
+			     gui-text="X:"
+			     gui-description="" >8</param>
+		      <param type="string" name="q_01pc_u1_window_502"
+			     gui-text="Y:"
+			     gui-description="" >8</param>
+		      <param type="string" name="q_01pc_u1_window_503"
+			     gui-text="Curve:"
+			     gui-description="" >4</param>
+		      </hbox>
+	      </page>
+	      <page name="z_01pc_u1_02" gui-text="Window offset">
+		      <hbox><spacer size="15" /><label>Window #1 offset -- lid</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_011"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_012"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <!-- I aim to invert ascending/descending in next revision-->
+		      <param type="optiongroup" name="q_01pc_u1_window_013" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #2 offset -- front panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_111"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_112"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="optiongroup" name="q_01pc_u1_window_113" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #3 offset -- right panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_211"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_212"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_213"
+			     gui-text="Anchor:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #4 offset -- rear panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_311"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_312"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="optiongroup" name="q_01pc_u1_window_313" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #5 offset -- left panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_411"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_412"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_413"
+			     gui-text="Anchor:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #6 offset -- base (only for flat-faced tounge and clip lock)</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_window_511"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_window_512"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="optiongroup" name="q_01pc_u1_window_513" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+	      </page>
+	      <page name="z_01pc_u1_11" gui-text="Insert geometry">
+		      <hbox><spacer size="15" /><label>Insert #1 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_001"
+			     gui-text="Length:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u1_insert_002"
+			     gui-text="Width:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u1_insert_003"
+			     gui-text="Height:"
+			     gui-description="" >24</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #2 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_101"
+			     gui-text="Length:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u1_insert_102"
+			     gui-text="Width:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u1_insert_103"
+			     gui-text="Height:"
+			     gui-description="" >24</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #3 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_201"
+			     gui-text="Length:"
+			     gui-description="" >16</param>
+		      <param type="string" name="q_01pc_u1_insert_202"
+			     gui-text="Width:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u1_insert_203"
+			     gui-text="Height:"
+			     gui-description="" >-31</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #4 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_301"
+			     gui-text="Length:"
+			     gui-description="" >16</param>
+		      <param type="string" name="q_01pc_u1_insert_302"
+			     gui-text="Width:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u1_insert_303"
+			     gui-text="Height:"
+			     gui-description="" >-31</param>
+		      </hbox>
+	      </page>
+	      <page name="z_01pc_u1_12" gui-text="Insert openings">
+		      <hbox><spacer size="15" /><label>Insert #1 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_011"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_012"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_013"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #2 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_111"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_112"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_113"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #3 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_211"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_212"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_213"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #4 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u1_insert_311"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_312"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u1_insert_313"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+	      </page>
+	      </param>
+
+      </page>
+      <page name="z_01pc_u2_52" gui-text="Component #2">
+      
+	      <hbox><param type="bool" name="q_01pc_u2_enable" gui-text="" appearance="header">true</param><label appearance="header">Component #2</label></hbox>
+	      <hbox>
+	      <spacer size="20" />
+	      <param type="string" name="q_01pc_u2_00L"
+		     gui-text="Length:"
+		     gui-description="" >50</param>
+	      <param type="string" name="q_01pc_u2_00W"
+		     gui-text="Width:"
+		     gui-description="" >25</param>
+	      <param type="string" name="q_01pc_u2_00H"
+		     gui-text="Height:"
+		     gui-description="" >75</param>
+	      </hbox>
+	      <hbox>
+	      <spacer size="20" />
+	      <vbox>
+	      <param type="optiongroup" name="q_01pc_u2_00_lidd" appearance="combo"
+		gui-text="Lid type:">
+		  <option value="c-lock">Clip lock</option>
+		  <!--option value="t-lock">Tear lock</option-->
+		  <!--option value="p-lock">Push lock</option-->
+		  <!--option value="a-lock">Auto lock</option-->
+		  <!--option value="f-lock">Flat lock</option-->
+		  <!--option value="u-lock">Full lock</option-->
+	      </param>
+	      <param type="optiongroup" name="q_01pc_u2_00_lidd_o" appearance="combo"
+		gui-text="Orient:">
+		  <option value="F">Forward</option>
+		  <option value="R">Reverse</option>
+	      </param>
+	      </vbox>
+	      <vbox>
+	      <param type="optiongroup" name="q_01pc_u2_00_base" appearance="combo"
+		gui-text="Base type:">
+		  <option value="c-lock">Clip lock</option>
+		  <!--option value="t-lock">Tear lock</option-->
+		  <option value="p-lock">Push lock</option>
+		  <!--option value="a-lock">Auto lock</option-->
+		  <!--option value="f-lock">Flat lock</option-->
+		  <!--option value="u-lock">Full lock</option-->
+	      </param>
+	      <param type="optiongroup" name="q_01pc_u2_00_base_o" appearance="combo"
+		gui-text="Orient:">
+		  <option value="F">Forward</option>
+		  <option value="R">Reverse</option>
+	      </param>
+	      </vbox>
+	      <param type="optiongroup" name="q_01pc_u2_00_flap" appearance="combo"
+		gui-text="Flap:">
+		  <option value="0">Flush</option>
+		  <option value="1">Relief</option>
+	      </param>
+	      <param type="optiongroup" name="q_01pc_u2_00_hang" appearance="combo"
+		gui-text="Hanger:">
+		  <option value="0">No</option>
+		  <option value="1">Obvious</option>
+	      </param>
+	      </hbox>
+	      <spacer size="8" />
+
+	      <param name="z_01pc_u2_g" type="notebook">
+	      <page name="z_01pc_u2_01" gui-text="Window geometry">
+		      <hbox><spacer size="15" /><label>Window #1 geometry -- lid</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_001"
+			     gui-text="X:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_window_002"
+			     gui-text="Y:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_window_003"
+			     gui-text="Curve:"
+			     gui-description="" >2</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #2 geometry -- front panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_101"
+			     gui-text="X:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_window_102"
+			     gui-text="Y:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_window_103"
+			     gui-text="Curve:"
+			     gui-description="" >3</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #3 geometry -- right panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_201"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_202"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_203"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #4 geometry -- rear panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_301"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_302"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_303"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #5 geometry -- left panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_401"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_402"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_403"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #6 geometry -- base (only when the type is tounge and/or clip lock)</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_501"
+			     gui-text="X:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_window_502"
+			     gui-text="Y:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_window_503"
+			     gui-text="Curve:"
+			     gui-description="" >5</param>
+		      </hbox>
+	      </page>
+	      <page name="z_01pc_u2_02" gui-text="Window offset">
+		      <hbox><spacer size="15" /><label>Window #1 offset -- lid</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_011"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_012"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <!-- I aim to invert ascending/descending in next revision-->
+		      <param type="optiongroup" name="q_01pc_u2_window_013" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #2 offset -- front panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_111"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_112"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="optiongroup" name="q_01pc_u2_window_113" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #3 offset -- right panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_211"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_212"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_213"
+			     gui-text="Anchor:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #4 offset -- rear panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_311"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_312"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="optiongroup" name="q_01pc_u2_window_313" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #5 offset -- left panel</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_411"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_412"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_413"
+			     gui-text="Anchor:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="8" />
+		      <hbox><spacer size="15" /><label>Window #6 offset -- base (only for flat-faced tounge and clip lock)</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_window_511"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_window_512"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="optiongroup" name="q_01pc_u2_window_513" appearance="combo"
+			gui-text="Anchor:">
+			  <option value="0">0. Do not use</option>
+			  <option value="1">1. Descending Left</option>
+			  <option value="2">2. Descending Centre</option>
+			  <option value="3">3. Descending Right</option>
+			  <option value="4">4. Middle Left</option>
+			  <option value="5">5. Absolute Centre</option>
+			  <option value="6">6. Middle Right</option>
+			  <option value="7">7. Ascending Left</option>
+			  <option value="8">8. Ascending Centre</option>
+			  <option value="9">9. Ascending Right</option>
+		      </param>
+		      </hbox>
+	      </page>
+	      <page name="z_01pc_u2_11" gui-text="Insert geometry">
+		      <hbox><spacer size="15" /><label>Insert #1 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_001"
+			     gui-text="Length:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u2_insert_002"
+			     gui-text="Width:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u2_insert_003"
+			     gui-text="Height:"
+			     gui-description="" >-1</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #2 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_101"
+			     gui-text="Length:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u2_insert_102"
+			     gui-text="Width:"
+			     gui-description="" >-1</param>
+		      <param type="string" name="q_01pc_u2_insert_103"
+			     gui-text="Height:"
+			     gui-description="" >10</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #3 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_201"
+			     gui-text="Length:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_insert_202"
+			     gui-text="Width:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_insert_203"
+			     gui-text="Height:"
+			     gui-description="" >-11</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #4 geometry</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_301"
+			     gui-text="Length:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_insert_302"
+			     gui-text="Width:"
+			     gui-description="" >10</param>
+		      <param type="string" name="q_01pc_u2_insert_303"
+			     gui-text="Height:"
+			     gui-description="" >-11</param>
+		      </hbox>
+	      </page>
+	      <page name="z_01pc_u2_12" gui-text="Insert openings">
+		      <hbox><spacer size="15" /><label>Insert #1 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_011"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_012"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_013"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #2 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_111"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_112"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_113"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #3 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_211"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_212"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_213"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+		      <spacer size="16" />
+		      <hbox><spacer size="15" /><label>Insert #4 opening</label></hbox>
+		      <hbox>
+		      <spacer size="25" />
+		      <param type="string" name="q_01pc_u2_insert_311"
+			     gui-text="X:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_312"
+			     gui-text="Y:"
+			     gui-description="" >0</param>
+		      <param type="string" name="q_01pc_u2_insert_313"
+			     gui-text="Curve:"
+			     gui-description="" >0</param>
+		      </hbox>
+	      </page>
+	      </param>
+
+	  </page>
+	  </param>
+
+    </page>
+
+<!-- ======================================== !-->
+
+    <page name="z2rigbox_tab" gui-text="RigidBox">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">(Unimplemented) Two piece rigid box:</label>
+        <spacer size="expand" />
+      </hbox>
+
+      <param name="z_02pc_c" type="notebook">
+      <page name="z_02pc_51" gui-text="Component #1">
+      <hbox><param type="bool" name="q_02pc_u1_enable" gui-text="" appearance="header">false</param><label appearance="header">Component #1</label></hbox>
+      <hbox>
+      <spacer size="20" />
+      <param type="string" name="q_02pc_u1_00L"
+             gui-text="Length:"
+             gui-description="" >50</param>
+      <param type="string" name="q_02pc_u1_00W"
+             gui-text="Width:"
+             gui-description="" >25</param>
+      <param type="string" name="q_02pc_u1_00H"
+             gui-text="Height:"
+             gui-description="" >75</param>
+      </hbox>
+      </page>
+      <page name="z_02pc_52" gui-text="Component #2">
+      <hbox><param type="bool" name="q_02pc_u2_enable" gui-text="" appearance="header">false</param><label appearance="header">Component #2</label></hbox>
+      <hbox>
+      <spacer size="20" />
+      <param type="string" name="q_02pc_u2_00L"
+             gui-text="Length:"
+             gui-description="" >64</param>
+      <param type="string" name="q_02pc_u2_00W"
+             gui-text="Width:"
+             gui-description="" >32</param>
+      <param type="string" name="q_02pc_u2_00H"
+             gui-text="Height:"
+             gui-description="" >96</param>
+      </hbox>
+      </page>
+      </param>
+    </page>
+
+<!-- ======================================== !-->
+
+    <page name="z3insert_tab" gui-text="Insert">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">Stand-alone inserts:</label>
+        <spacer size="expand" />
+      </hbox>
+      <spacer size="6" />
+      
+      <label>The facility of separating inserts from their associated carton designs is intended to allow for more complex geometries than can be associated with either soft carton or rigid box products exclusively. For this reason, the interface below should be considered volatile and subject to change.</label>
+      <label>All the expected variables to be controlled here will not fit on this page; not without a scrollable frame provided by Inkscape, nor is it trivial to break out from fixed to variable numbers of items in a collection. Expect a facility to draw in desirable geometric data from a company database.</label>
+      <spacer size="4" />
+      
+      <param name="z_03in_g" type="notebook">
+
+      <page name="z_03in_11" gui-text="Insert geometry">
+      <hbox><spacer size="15" /><label>Insert #1 geometry</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_00L"
+             gui-text="Length:"
+             gui-description="" >10</param>
+      <param type="string" name="q_03in_00W"
+             gui-text="Width:"
+             gui-description="" >10</param>
+      <param type="string" name="q_03in_00H"
+             gui-text="Height:"
+             gui-description="" >10</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #2 geometry</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_10L"
+             gui-text="Length:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_10W"
+             gui-text="Width:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_10H"
+             gui-text="Height:"
+             gui-description="" >20</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #3 geometry</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_20L"
+             gui-text="Length:"
+             gui-description="" >10</param>
+      <param type="string" name="q_03in_20W"
+             gui-text="Width:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_20H"
+             gui-text="Height:"
+             gui-description="" >30</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #4 geometry</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_30L"
+             gui-text="Length:"
+             gui-description="" >30</param>
+      <param type="string" name="q_03in_30W"
+             gui-text="Width:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_30H"
+             gui-text="Height:"
+             gui-description="" >10</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #5 geometry</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_40L"
+             gui-text="Length:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_40W"
+             gui-text="Width:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_40H"
+             gui-text="Height:"
+             gui-description="" >20</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #6 geometry</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_50L"
+             gui-text="Length:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_50W"
+             gui-text="Width:"
+             gui-description="" >20</param>
+      <param type="string" name="q_03in_50H"
+             gui-text="Height:"
+             gui-description="" >20</param>
+      </hbox>
+      </page>
+      
+      <page name="z_03in_12" gui-text="Insert extension">
+      <hbox><spacer size="15" /><label>Insert #1 extension</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_0E1"
+             gui-text="Ex 1 depth:"
+             gui-description="" >5</param>
+      <param type="string" name="q_03in_0E2"
+             gui-text="Ex 2 depth:"
+             gui-description="" >5</param>
+      <param type="string" name="q_03in_0E3"
+             gui-text="Glue Tab:"
+             gui-description="" >9</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #2 extension</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_1E1"
+             gui-text="Ex 1 depth:"
+             gui-description="" >8</param>
+      <param type="string" name="q_03in_1E2"
+             gui-text="Ex 2 depth:"
+             gui-description="" >8</param>
+      <param type="string" name="q_03in_1E3"
+             gui-text="Glue Tab:"
+             gui-description="" >9</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #3 extension</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_2E1"
+             gui-text="Ex 1 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_2E2"
+             gui-text="Ex 2 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_2E3"
+             gui-text="Glue Tab:"
+             gui-description="" >9</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #4 extension</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_3E1"
+             gui-text="Ex 1 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_3E2"
+             gui-text="Ex 2 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_3E3"
+             gui-text="Glue Tab:"
+             gui-description="" >9</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #5 extension</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_4E1"
+             gui-text="Ex 1 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_4E2"
+             gui-text="Ex 2 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_4E3"
+             gui-text="Glue Tab:"
+             gui-description="" >9</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #6 extension</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_5E1"
+             gui-text="Ex 1 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_5E2"
+             gui-text="Ex 2 depth:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_5E3"
+             gui-text="Glue Tab:"
+             gui-description="" >9</param>
+      </hbox>
+      </page>
+      
+      <page name="z_03in_13" gui-text="Insert inner cut">
+      <hbox><spacer size="15" /><label>Insert #1 inner</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_011"
+             gui-text="Aperture:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_012"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_013"
+             gui-text="Groove:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #2 inner</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_111"
+             gui-text="Aperture:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_112"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_113"
+             gui-text="Groove:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #3 inner</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_211"
+             gui-text="Aperture:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_212"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_213"
+             gui-text="Groove:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #4 inner</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_311"
+             gui-text="Aperture:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_312"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_313"
+             gui-text="Groove:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #5 inner</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_411"
+             gui-text="Aperture:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_412"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_413"
+             gui-text="Groove:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #6 inner</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_511"
+             gui-text="Aperture:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_512"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_513"
+             gui-text="Groove:"
+             gui-description="" >0</param>
+      </hbox>
+      </page>
+
+      <page name="z_03in_14" gui-text="Insert outer cut">
+      <hbox><spacer size="15" /><label>Insert #1 outer</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_0F1"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_0F2"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_0F3"
+             gui-text="Curve:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_0F4"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #2 outer</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_1F1"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_1F2"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_1F3"
+             gui-text="Curve:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_1F4"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #3 outer</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_2F1"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_2F2"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_2F3"
+             gui-text="Curve:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_2F4"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #4 outer</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_3F1"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_3F2"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_3F3"
+             gui-text="Curve:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_3F4"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #5 outer</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_4F1"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_4F2"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_4F3"
+             gui-text="Curve:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_4F4"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox><spacer size="15" /><label>Insert #6 outer</label></hbox>
+      <hbox>
+      <spacer size="25" />
+      <param type="string" name="q_03in_5F1"
+             gui-text="X:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_5F2"
+             gui-text="Y:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_5F3"
+             gui-text="Curve:"
+             gui-description="" >0</param>
+      <param type="string" name="q_03in_5F4"
+             gui-text="Anchor:"
+             gui-description="" >0</param>
+      </hbox>
+      </page>
+      
+      </param>
+    </page>
+
+<!-- ======================================== !-->
+
+    <page name="z4impose_tab" gui-text="Imposition">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">(Unimplemented) Imposition Plan:</label>
+        <spacer size="expand" />
+      </hbox>
+      <spacer size="6" />
+
+      <label>Here we combine all possible consumer components of the final design into one canvas. This will become the lasercut knifeline imposition board on which cut and crease blades are fitted. Choose how each component should be presented and repeated.</label>
+      <spacer size="4" />
+
+      <hbox>
+      <param type="optiongroup" name="q_04im_01_type" appearance="combo"
+        gui-text="Type #1:">
+          <option value="0">Not required</option>
+          <option value="1">1pc Soft Carton</option>
+          <option value="2">2pc Rigid Box</option>
+          <option value="3">Multiple Insert Matrix</option>
+      </param>
+      <param type="optiongroup" name="q_04im_01_bind" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="9">Independent Metrics</option>
+          <option value="1">Item #1</option>
+          <option value="2">Item #2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_04im_01_XX"
+             gui-text="X / Horizontal:"
+             gui-description="" >0</param>
+      <param type="string" name="q_04im_01_YY"
+             gui-text="Y / Vertical:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox>
+      <param type="optiongroup" name="q_04im_02_type" appearance="combo"
+        gui-text="Type #2:">
+          <option value="0">Not required</option>
+          <option value="1">1pc Soft Carton</option>
+          <option value="2">2pc Rigid Box</option>
+          <option value="3">Multiple Insert Matrix</option>
+      </param>
+      <param type="optiongroup" name="q_04im_02_bind" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="9">Independent Metrics</option>
+          <option value="1">Item #1</option>
+          <option value="2">Item #2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_04im_02_XX"
+             gui-text="X / Horizontal:"
+             gui-description="" >0</param>
+      <param type="string" name="q_04im_02_YY"
+             gui-text="Y / Vertical:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox>
+      <param type="optiongroup" name="q_04im_03_type" appearance="combo"
+        gui-text="Type #1:">
+          <option value="0">Not required</option>
+          <option value="1">1pc Soft Carton</option>
+          <option value="2">2pc Rigid Box</option>
+          <option value="3">Multiple Insert Matrix</option>
+      </param>
+      <param type="optiongroup" name="q_04im_03_bind" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="9">Independent Metrics</option>
+          <option value="1">Item #1</option>
+          <option value="2">Item #2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_04im_03_XX"
+             gui-text="X / Horizontal:"
+             gui-description="" >0</param>
+      <param type="string" name="q_04im_03_YY"
+             gui-text="Y / Vertical:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox>
+      <param type="optiongroup" name="q_04im_04_type" appearance="combo"
+        gui-text="Type #2:">
+          <option value="0">Not required</option>
+          <option value="1">1pc Soft Carton</option>
+          <option value="2">2pc Rigid Box</option>
+          <option value="3">Multiple Insert Matrix</option>
+      </param>
+      <param type="optiongroup" name="q_04im_04_bind" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="9">Independent Metrics</option>
+          <option value="1">Item #1</option>
+          <option value="2">Item #2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_04im_04_XX"
+             gui-text="X / Horizontal:"
+             gui-description="" >0</param>
+      <param type="string" name="q_04im_04_YY"
+             gui-text="Y / Vertical:"
+             gui-description="" >0</param>
+      </hbox>
+      <spacer size="16" />
+      <hbox>
+      <param type="optiongroup" name="q_04im_00_layout" appearance="combo"
+        gui-text="Layout:">2
+          <option value="1">4x + 1y</option>
+          <option value="2">2x + 2y</option>
+          <option value="3">1x + 4y</option>
+      </param>
+      <param type="optiongroup" name="q_04im_00_target" appearance="combo"
+        gui-text="Target:">
+          <option value="0">[ not used ]</option>
+          <option value="1">Speculate</option>
+          <option value="2">Blueprint</option>
+          <option value="3">Knifeline</option>
+      </param>
+      </hbox>
+    </page>
+
+<!-- ======================================== !-->
+
+    <page name="z5outset_tab" gui-text="Container">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">Regular Slotted Shipping Containers:</label>
+        <spacer size="expand" />
+      </hbox>
+      <spacer size="6" />
+
+      <label>Containers will be drawn to match the flat carton size to be diecut, or to indepenent dimensions for other odd packaging jobs.</label>
+      <spacer size="4" />
+
+      <hbox>
+      <param type="optiongroup" name="q_05ou_01_type" appearance="combo"
+        gui-text="Type #1:">
+          <option value="0">Not required</option>
+          <option value="1">Regular Slotted</option>
+      </param>
+      <param type="optiongroup" name="q_05ou_01_bind" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="9">Independent Metrics</option>
+          <option value="1">1pc Soft Carton</option>
+          <option value="2">2pc Rigid Box</option>
+          <option value="3">One Insert only</option>
+          <option value="4">Full Imposition</option>
+      </param>
+      <param type="optiongroup" name="q_05ou_01_unit" appearance="combo"
+        gui-text="Unit:">
+          <option value="1">Unit 1</option>
+          <option value="2">Unit 2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_05ou_01_height"
+             gui-text="Container Height:"
+             gui-description="">80</param>
+      <param type="string" name="q_05ou_01_quantity"
+             gui-text="Containers per raw sheet:"
+             gui-description="">2</param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_05ou_01_len"
+             gui-text="Independent Length:"
+             gui-description="">215</param>
+      <param type="string" name="q_05ou_01_wid"
+             gui-text="Independent Width:"
+             gui-description="">305</param>
+      </hbox>
+      <spacer size="20" />
+      <hbox>
+      <param type="optiongroup" name="q_05ou_02_type" appearance="combo"
+        gui-text="Type #2:">
+          <option value="0">Not required</option>
+          <option value="1">Regular Slotted</option>
+      </param>
+      <param type="optiongroup" name="q_05ou_02_bind" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="9">Independent Metrics</option>
+          <option value="1">1pc Soft Carton</option>
+          <option value="2">2pc Rigid Box</option>
+          <option value="3">One Insert only</option>
+          <option value="4">Full Imposition</option>
+      </param>
+      <param type="optiongroup" name="q_05ou_02_unit" appearance="combo"
+        gui-text="Unit:">
+          <option value="1">Unit 1</option>
+          <option value="2">Unit 2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_05ou_02_height"
+             gui-text="Container height:"
+             gui-description="">80</param>
+      <param type="string" name="q_05ou_02_quantity"
+             gui-text="Containers per raw sheet:"
+             gui-description="">2</param>
+      </hbox>
+      <hbox>
+      <param type="string" name="q_05ou_02_len"
+             gui-text="Independent Length:"
+             gui-description="">0</param>
+      <param type="string" name="q_05ou_02_wid"
+             gui-text="Independent Width:"
+             gui-description="">0</param>
+      </hbox>
+      <spacer size="20" />
+    </page>
+
+<!-- ======================================== !-->
+
+    <page name="z6pallet_tab" gui-text="Palletisation">
+      <spacer size="12" />
+      <hbox>
+        <spacer size="expand" />
+        <label appearance="header">(Unimplemented) Palletisation Plan:</label>
+        <spacer size="expand" />
+      </hbox>
+      <spacer size="6" />
+
+      <label>Here we intend to compose at least two planing documents; one set of instructions for our sending staff to package items, and the other for their receiving staff to unpack flat, assemble fat, repack and eventually display in-store. It is called a Palletisation Plan because from our perspective, the job culminates into multiple evenly distributed and stable pallets of inventory, which we ship out and never again see back in our factory.</label>
+      <spacer size="4" />
+
+      <hbox>
+      <param type="optiongroup" name="q_06pa_01_z1" appearance="combo"
+        gui-text="Type #1:">
+          <option value="0">[ not required ]</option>
+          <option value="1">Standard 50x50in (127x127cm)</option>
+          <option value="2">Half 50x25in (127x63.5cm)</option>
+          <option value="3">Quarter 25x25in (63x5x63.5cm)</option>
+      </param>
+      <param type="optiongroup" name="q_06pa_01_z2" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="1">Slotted Container, type #1</option>
+          <option value="2">Slotted Container, type #2</option>
+      </param>
+      </hbox>
+      <hbox>
+      <param type="optiongroup" name="q_06pa_02_z1" appearance="combo"
+        gui-text="Type #2:">
+          <option value="0">[ not required ]</option>
+          <option value="1">Standard 50x50in (127x127cm)</option>
+          <option value="2">Half 50x25in (127x63.5cm)</option>
+          <option value="3">Quarter 25x25in (63x5x63.5cm)</option>
+      </param>
+      <param type="optiongroup" name="q_06pa_02_z2" appearance="combo"
+        gui-text="Bind to:">
+          <option value="0">[ not used ]</option>
+          <option value="1">Slotted Container, type #1</option>
+          <option value="2">Slotted Container, type #2</option>
+      </param>
+      </hbox>
+    </page>
+
+  </param>
+
+<!-- |||||||||||||||||||||||||||||||||||||||| !-->
+
+  <!-- The "Apply" button is good, until we have automation of undo history at least,
+       and grouping of image elements ideally! -->
+  <effect needs-live-preview="false">
+    <object-type>path</object-type><!--object-type>all</object-type-->
+    <effects-menu>
+       <submenu name="aSyn3c" />
+    </effects-menu>
+  </effect>
+  <script>
+    <!--  reldir="extensions" interpreter="python"  -->
+    <!--command location="inx" interpreter="python">aSyn3c_CardCarton_r1/aSyn3c_CardCarton_r1.py</command-->
+    <command location="extensions" interpreter="python">aSyn3c_CardCarton_r1/aSyn3c_CardCarton_r1.py</command>
+  </script>
+  <!--dependency type="executable" location="extensions">aSyn3c_CardCarton_r1/aSyn3c_CardCarton_r1.py</dependency-->
+</inkscape-extension>
+
