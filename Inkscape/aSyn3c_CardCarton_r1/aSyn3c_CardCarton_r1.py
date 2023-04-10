@@ -773,9 +773,9 @@ class aSyn3c91(_inx.Effect):
            'B2': _func_flap_base( 0x3002, 2, 1 ), # this brace will be flagged as reverse-side bum-geometry.
 
           },
-          'inner-flap': {
+          'inner-flap': { # These had to be split into two parts because of my method of separating flush and relief entry relative to lid and base.
 
-           'A1i1': [
+           'A1i1': [ # Begin path as a relief or flush entry into the left side tab. This is for same side opening lids.
             [ 0x0802 ],
             [ 0 , 'M', __.z1carton['GRID'][iz][2][0]+__._geom_['q_flap']['inn']['x'][0], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['inn']['y'][0], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][2][0]+__._['q_tab_dust_seam_reduction']+__._geom_['q_flap']['inn']['x'][1], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['inn']['y'][1], ],
@@ -786,7 +786,7 @@ class aSyn3c91(_inx.Effect):
             [ 0 , 'M', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][2][1]-__.z1carton['FlapHeight'][iz], ],
             # bug: The 'Move' commencing this flap once drew a line from the previous 'Move' commencing the lid; I do not know why.
             ],
-           'A1o1': [
+           'A1o1': [ # Continue to opposite end of this shape which is common to both flush and relief tabs.
             [ 0x0802 ],
             [ 0 , 'L', __.z1carton['GRID'][iz][3][0]-__._['q_tab_dust_seam_reduction']-__._geom_['q_flap']['out']['x'][3], __.z1carton['GRID'][iz][2][1]+__._geom_['q_flap']['out']['y'][3]-__.z1carton['FlapHeight'][iz], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][3][0]-__._['q_tab_dust_seam_reduction']-__._geom_['q_flap']['out']['x'][2], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['out']['y'][2], ],
@@ -795,7 +795,7 @@ class aSyn3c91(_inx.Effect):
             [ 0 , 'L', __.z1carton['GRID'][iz][3][0], __.z1carton['GRID'][iz][2][1], ],
             ],
 
-           'A1i2': [
+           'A1i2': [ # Begin path common to both flush and relief tabs
             [ 0x0803 ],
             [ 0 , 'M', __.z1carton['GRID'][iz][4][0], __.z1carton['GRID'][iz][2][1], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][4][0]+__._['q_tab_dust_seam_reduction']+__._geom_['q_flap']['out']['x'][0], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['out']['y'][0], ],
@@ -803,7 +803,7 @@ class aSyn3c91(_inx.Effect):
             [ 0 , 'L', __.z1carton['GRID'][iz][4][0]+__._['q_tab_dust_seam_reduction']+__._geom_['q_flap']['out']['x'][2], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['out']['y'][2], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][4][0]+__._['q_tab_dust_seam_reduction']+__._geom_['q_flap']['out']['x'][3], __.z1carton['GRID'][iz][2][1]+__._geom_['q_flap']['out']['y'][3]-__.z1carton['FlapHeight'][iz], ],
             ],
-           'A1o2': [
+           'A1o2': [ # Continue to opposite end of this shape in a manner specific to either relief or flush tabs.
             [ 0x0803 ],
             [ 0 , 'L', __.z1carton['GRID'][iz][5][0]-__._geom_['q_flap']['inn']['x'][2], __.z1carton['GRID'][iz][2][1]+__._geom_['q_flap']['inn']['y'][3]-__.z1carton['FlapHeight'][iz], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][5][0]-__._geom_['q_flap']['inn']['x'][2], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['inn']['y'][2], ],
@@ -816,7 +816,7 @@ class aSyn3c91(_inx.Effect):
             [ 0 , 'L', __.z1carton['GRID'][iz][5][0], __.z1carton['GRID'][iz][2][1], ],
             ],
 
-           'A2i1': [
+           'A2i1': [ # This is for reverse side opening lids. The shape is mirrored to have the curve align to the direction of the lid tab.
             [ 0x2802 ],
             [ 0 , 'M', __.z1carton['GRID'][iz][2][0]+__._['q_tab_dust_seam_reduction']+__._geom_['q_flap']['out']['x'][0], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['inn']['y'][0], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][2][0]+__._['q_tab_dust_seam_reduction']+__._geom_['q_flap']['out']['x'][1], __.z1carton['GRID'][iz][2][1]-__._geom_['q_flap']['inn']['y'][1], ],
