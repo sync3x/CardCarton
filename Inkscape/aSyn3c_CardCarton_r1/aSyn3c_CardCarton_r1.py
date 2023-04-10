@@ -7,7 +7,7 @@
 ##_____________________________________________________________##
 
 from __future__ import division # python 3 provides true division by default #https://peps.python.org/pep-0238/ # was found in a scribus script
-idstamping={'net.asyn3c.','inkscape.carton.','rev.0001.','ver.2023.04.09'}
+idstamping={'net.asyn3c.','inkscape.carton.','rev.0001.','ver.2023.04.10'}
 
 ## CONDENSE BUNDLED LIB NAME ##
 import array as _a#############
@@ -680,6 +680,59 @@ class aSyn3c91(_inx.Effect):
          },
          
         } # Go straight from allocating one single static array, to adding multiple dynamic arrays.
+        def _func_flap_base(flag, number, updown):
+          if (flag& 0x02)!=0x02: # clip-lock lid and base design number
+            return []
+
+          offset=[0,0] # X is useful; Y not so much, until I can use a loop to reverse the order of the plotting below.
+          offset[0]=0 if number==1 else 2 # closing walls &,    clockwise curves;
+
+          #if updown==0:
+          #  offset[0]=0 if number==1 else 2 # closing walls &,    clockwise curves;
+          #if updown==1:
+          #  offset[0]=2 if number==1 else 0 # ticking clocks...   efficient plots.
+          _art=[
+            [ flag ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][offset[0]+1][0], __.z1carton['GRID'][iz][offset[1]+2][1], ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][offset[0]+1][0], __.z1carton['GRID'][iz][offset[1]+1][1], ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][offset[0]+1][0]+__._['q_tab_lid_reduce'], __.z1carton['GRID'][iz][offset[1]+1][1], ],
+            [ 0 , 'C',
+              (__.z1carton['GRID'][iz][offset[0]+1][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][offset[1]+1][1])-(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
+              (__.z1carton['GRID'][iz][offset[0]+1][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][offset[1]+0][1]),
+              (__.z1carton['GRID'][iz][offset[0]+1][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']), (__.z1carton['GRID'][iz][offset[1]+0][1]), ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][offset[0]+2][0]-__._['q_tab_lid_reduce']-__._['q_tab_lid_taper'], __.z1carton['GRID'][iz][offset[1]+0][1], ],
+            [ 0 , 'C',
+              (__.z1carton['GRID'][iz][offset[0]+2][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][offset[1]+0][1]),
+              (__.z1carton['GRID'][iz][offset[0]+2][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][offset[1]+1][1])-(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
+              (__.z1carton['GRID'][iz][offset[0]+2][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][offset[1]+1][1]), ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][offset[0]+2][0], __.z1carton['GRID'][iz][offset[1]+1][1], ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][offset[0]+2][0], __.z1carton['GRID'][iz][offset[1]+2][1], ],
+          ] if (flag& 0x1000)==0x0000 else [
+            [ flag ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][offset[0]+2][0], __.z1carton['GRID'][iz][offset[1]+4][1], ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][offset[0]+2][0], __.z1carton['GRID'][iz][offset[1]+5][1], ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][offset[0]+2][0]-__._['q_tab_lid_reduce'], __.z1carton['GRID'][iz][offset[1]+5][1], ],
+            [ 0 , 'C',
+              (__.z1carton['GRID'][iz][offset[0]+2][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][offset[1]+5][1])+(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
+              (__.z1carton['GRID'][iz][offset[0]+2][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][offset[1]+5][1])+(__._['q_tab_lid_diameter']),
+              (__.z1carton['GRID'][iz][offset[0]+2][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']), (__.z1carton['GRID'][iz][offset[1]+5][1])+(__._['q_tab_lid_diameter']), ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][offset[0]+1][0]+__._['q_tab_lid_reduce']+__._['q_tab_lid_taper'], __.z1carton['GRID'][iz][offset[1]+5][1]+__._['q_tab_lid_diameter'], ],
+            [ 0 , 'C',
+              (__.z1carton['GRID'][iz][offset[0]+1][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][offset[1]+5][1])+(__._['q_tab_lid_diameter']),
+              (__.z1carton['GRID'][iz][offset[0]+1][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][offset[1]+5][1])+(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
+              (__.z1carton['GRID'][iz][offset[0]+1][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][offset[1]+5][1]), ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][offset[0]+1][0], __.z1carton['GRID'][iz][offset[1]+5][1], ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][offset[0]+1][0], __.z1carton['GRID'][iz][offset[1]+4][1], ],
+          ]
+          return(_art)
+        def _func_flap_dust(flag):
+          if (flag& 0x02)!=0x02: # clip-lock lid and base design number
+            return []
+          _art=[
+            [ flag ],
+          ]
+          return(_art)
+          
         _softcarton_['cliplock']={
          
           'outer-edge': {
@@ -701,87 +754,23 @@ class aSyn3c91(_inx.Effect):
             [ 0 , 'L', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][2][1], ],
            ],
            'B1': [
-            [ 0x3002 ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][4][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][4][1], ],
-           ],
-           'B2': [
-            [ 0x1003 ],
+            [ 0x1002 ],
             [ 0 , 'M', __.z1carton['GRID'][iz][4][0], __.z1carton['GRID'][iz][4][1], ],
             [ 0 , 'L', __.z1carton['GRID'][iz][3][0], __.z1carton['GRID'][iz][4][1], ],
+           ],
+           'B2': [
+            [ 0x3003 ],
+            [ 0 , 'M', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][4][1], ],
+            [ 0 , 'L', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][4][1], ],
            ],
 
           },
           'outer-flap': {
 
-           'A1': [
-            [ 0x0802 ], ##------------## Upper Forward-Side Clip-Lock
-            #[ 0 , 'M', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][2][1], ], # this move is redundant when the lid starts at the path's point of origin.
-            [ 0 , 'L', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][1][1], ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][1][0]+__._['q_tab_lid_reduce'], __.z1carton['GRID'][iz][1][1], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][1][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][1][1])-(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][1][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][0][1]),
-              (__.z1carton['GRID'][iz][1][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']), (__.z1carton['GRID'][iz][0][1]), ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][2][0]-__._['q_tab_lid_reduce']-__._['q_tab_lid_taper'], __.z1carton['GRID'][iz][0][1], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][2][0]-__._['q_tab_lid_reduce'])-(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][0][1]),
-              (__.z1carton['GRID'][iz][2][0]-__._['q_tab_lid_reduce']), (__.z1carton['GRID'][iz][1][1])-(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][2][0]-__._['q_tab_lid_reduce']), (__.z1carton['GRID'][iz][1][1]), ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][1][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][2][1], ],
-            ],
-           'A2': [
-            [ 0x2803 ], # the remainder of this brace will be flagged as same-side lid-geometry.
-            [ 0 , 'M', __.z1carton['GRID'][iz][3][0], __.z1carton['GRID'][iz][2][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][3][0], __.z1carton['GRID'][iz][1][1], ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][3][0]+__._['q_tab_lid_reduce'], __.z1carton['GRID'][iz][1][1], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][3][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][1][1])-(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][3][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][0][1]),
-              (__.z1carton['GRID'][iz][3][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']), (__.z1carton['GRID'][iz][0][1]), ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][4][0]-__._['q_tab_lid_reduce']-__._['q_tab_lid_taper'], __.z1carton['GRID'][iz][0][1], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][4][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][0][1]),
-              (__.z1carton['GRID'][iz][4][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][1][1])-(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][4][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][1][1]), ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][4][0], __.z1carton['GRID'][iz][1][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][4][0], __.z1carton['GRID'][iz][2][1], ],
-            ],
-           'B1': [
-            [ 0x3003 ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][4][0], __.z1carton['GRID'][iz][4][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][4][0], __.z1carton['GRID'][iz][5][1], ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][4][0]-__._['q_tab_lid_reduce'], __.z1carton['GRID'][iz][5][1], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][4][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][4][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']),
-              (__.z1carton['GRID'][iz][4][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']), (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']), ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][3][0]+__._['q_tab_lid_reduce']+__._['q_tab_lid_taper'], __.z1carton['GRID'][iz][5][1]+__._['q_tab_lid_diameter'], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][3][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']),
-              (__.z1carton['GRID'][iz][3][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][3][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][5][1]), ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][3][0], __.z1carton['GRID'][iz][5][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][3][0], __.z1carton['GRID'][iz][4][1], ],
-            ],
-           'B2': [
-            [ 0x1002 ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][4][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][2][0], __.z1carton['GRID'][iz][5][1], ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][2][0]-__._['q_tab_lid_reduce'], __.z1carton['GRID'][iz][5][1], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][2][0])-__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][2][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']),
-              (__.z1carton['GRID'][iz][2][0])-__._['q_tab_lid_reduce']-(__._['q_tab_lid_taper']), (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']), ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][1][0]+__._['q_tab_lid_reduce']+__._['q_tab_lid_taper'], __.z1carton['GRID'][iz][5][1]+__._['q_tab_lid_diameter'], ],
-            [ 0 , 'C',
-              (__.z1carton['GRID'][iz][1][0])+__._['q_tab_lid_reduce']+(__._['q_tab_lid_taper']*__._['q_tab_lid_curve_taper']), (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']),
-              (__.z1carton['GRID'][iz][1][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][5][1])+(__._['q_tab_lid_diameter']*__._['q_tab_lid_curve_diameter']),
-              (__.z1carton['GRID'][iz][1][0])+__._['q_tab_lid_reduce'], (__.z1carton['GRID'][iz][5][1]), ],
-            [ 0 , 'M', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][5][1], ],
-            [ 0 , 'L', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][4][1], ],
-            ],
+           'A1': _func_flap_base( 0x0802, 1, 0 ), # this brace will be flagged as forward-side lid-geometry.
+           'A2': _func_flap_base( 0x2803, 2, 0 ), # this brace will be flagged as reverse-side lid-geometry.
+           'B1': _func_flap_base( 0x1003, 1, 1 ), # this brace will be flagged as forward-side bum-geometry.
+           'B2': _func_flap_base( 0x3002, 2, 1 ), # this brace will be flagged as reverse-side bum-geometry.
 
           },
           'inner-flap': {
@@ -1193,23 +1182,26 @@ class aSyn3c91(_inx.Effect):
         _chop_=[
 
 ##------------## Closed Path ##----##
-         ['q_chop_out_flap_out'], [
+         ['q_diagnose'], [
 
-          # This is the right side of the carton.
-          [ [ 0 , 'M', __.z1carton['GRID'][iz][1][0], __.z1carton['GRID'][iz][2][1], ], ],
+          # This is the right side of the carton. This initial move is now redundant
+          # in this case where components have been offloaded into arrays and functions.
+          [ [ 0 , 'M', __.z1carton['GRID'][iz][1][0]-(0), __.z1carton['GRID'][iz][2][1]-(0), ], ],
+          [ [ 0 , 'M', __.z1carton['GRID'][iz][1][0]-(4), __.z1carton['GRID'][iz][2][1]-(4), ], ],
           
 ##------------## Lid
           ##------------## Upper Forward-Side Clip-Lock
+          ], ['q_chop_out_flap_out'], [
           _softcarton_['cliplock']['outer-flap']['A1'],
           ], ['q_chop_out_flap_inn'], [
           _softcarton_['cliplock']['inner-flap']['A1i1'],_softcarton_['cliplock']['inner-flap']['A1o1'],
-          ], ['q_chop_out_flap_out'], [
+          ], ['q_chop_out_basewall'], [
           _softcarton_['cliplock']['outer-edge']['A1'], 
           ], ['q_chop_out_flap_inn'], [
           _softcarton_['cliplock']['inner-flap']['A1i2'],_softcarton_['cliplock']['inner-flap']['A1o2'],
 
           ##------------## Upper Reverse-Side Clip-Lock
-          ], ['q_chop_out_flap_out'], [
+          ], ['q_chop_out_basewall'], [
           _softcarton_['cliplock']['outer-edge']['A2'], 
           ], ['q_chop_out_flap_inn'], [
           _softcarton_['cliplock']['inner-flap']['A2i1'],_softcarton_['cliplock']['inner-flap']['A2o1'],
@@ -1236,7 +1228,7 @@ class aSyn3c91(_inx.Effect):
           ##------------## Lower Forward-Side Clip-Lock
           ], ['q_chop_out_flap_inn'], [
           _softcarton_['cliplock']['inner-flap']['B1i1'],_softcarton_['cliplock']['inner-flap']['B1o1'],
-          ], ['q_chop_out_flap_out'], [
+          ], ['q_chop_out_basewall'], [
           _softcarton_['cliplock']['outer-edge']['B1'], 
           ], ['q_chop_out_flap_inn'], [
           _softcarton_['cliplock']['inner-flap']['B1i2'],_softcarton_['cliplock']['inner-flap']['B1o2'],
@@ -1250,7 +1242,7 @@ class aSyn3c91(_inx.Effect):
           _softcarton_['cliplock']['outer-flap']['B2'],
           ], ['q_chop_out_flap_inn'], [
           _softcarton_['cliplock']['inner-flap']['B2i2'],_softcarton_['cliplock']['inner-flap']['B2o2'],
-          ], ['q_chop_out_flap_out'], [
+          ], ['q_chop_out_basewall'], [
           _softcarton_['cliplock']['outer-edge']['B2'], 
 
           ], ['q_chop_out'], [
@@ -2676,6 +2668,13 @@ class aSyn3c91(_inx.Effect):
           'fill-opacity'  : 0.2 # Diagnostic fill features are 80% opaque.
         },
         # SoftCarton Special Chops
+        'q_chop_out_basewall': { # this is what to plot where there are no dust flaps or lid and base breakouts.
+          'stroke'        : __._['q_col1_cut7'], #'#FF00FF', # Magenta Cut
+          'stroke-width'  : __._['q_col1_cut2'], # thin cut line
+          'stroke-opacity': __._['q_col1_cut3'], # less significant
+          'fill'          : 'none', #'#002000', # Use only to determine shape area.
+          'fill-opacity'  : 0.2 # Diagnostic fill feature is 80% translucent.
+        },
         'q_chop_out_sidewall': { # left and right side walls and glue tabs
           'stroke'        : __._['q_col1_cut7'], #'#FF00FF', # Magenta Cut
           'stroke-width'  : __._['q_col1_cut2'], # thin cut line

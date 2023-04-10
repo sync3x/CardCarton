@@ -8,7 +8,7 @@
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <!--= my guide: https://www.linux-magazine.com/Issues/2020/239/Magic-Circle ==-->
   <name>CardCarton rev.1</name>
-  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.04.09</id>
+  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.04.10</id>
 
   <param type="int"
    name="historyfader01"
