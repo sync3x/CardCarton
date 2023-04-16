@@ -7,7 +7,7 @@
 ##_____________________________________________________________##
 
 from __future__ import division # python 3 provides true division by default #https://peps.python.org/pep-0238/ # was found in a scribus script
-idstamping={'net.asyn3c.','inkscape.carton.','rev.0001.','ver.2023.04.10'}
+idstamping={'net.asyn3c.','inkscape.carton.','rev.0001.','ver.2023.04.17'}
 
 ## CONDENSE BUNDLED LIB NAME ##
 import array as _a#############
@@ -457,15 +457,16 @@ class aSyn3c91(_inx.Effect):
 
           if xml0!='': # plot only non-empty sets; presently, everything is being duplicated and some empty sets are triplicated.
 
-            if __.debug[0] or __.debug[1]: _inx.utils.debug([style0[0:6],style0[6:]])
+            if __.debug[0] or __.debug[1]:
+              _inx.utils.debug([style0[0:6],style0[6:]])
             
             attb={ \
               'style':str(_inx.Style(__._stylesheet_[style0])), \
               _inx.addNS('label','inkscape') : style0, 'd' : xml0 }
-            if style0=='q_diagnose': _inx.utils.debug('[[  '+xml0+'  ]]')
+            if (__.debug[0] or __.debug[1]) and style0=='q_diagnose':
+              _inx.utils.debug('[[  '+xml0+'  ]]')
 
-            line=_x.SubElement(__._page_, \
-            _inx.addNS('path','svg'), attb )
+            line=_x.SubElement(__._page_, _inx.addNS('path','svg'), attb )
             ##https://alpha.inkscape.org/vectors/www.inkscapeforum.com/viewtopicf489.html?t=12849
             # alternate implementation syntax may be in above URL
             
