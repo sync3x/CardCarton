@@ -8,7 +8,7 @@
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <!--= my guide: https://www.linux-magazine.com/Issues/2020/239/Magic-Circle ==-->
   <name>CardCarton rev.1</name>
-  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.04.17</id>
+  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.11.05</id>
 
   <param type="int"
    name="historyfader01"
@@ -1794,6 +1794,28 @@
           <option value="3">Knifeline</option>
       </param>
       </hbox>
+
+      <hbox>
+      <param type="optiongroup" name="q_04im_00_size" appearance="combo"
+        gui-text="Sheet size:">
+          <option value="0">[ smallest fit of one item ]</option>
+          <option value="1">[ smallest fit of largest quantity ]</option>
+          <option value="2">455 x 650</option>
+          <option value="3">540 x 740</option>
+          <option value="3">605 x 740</option>
+          <option value="3">605 x 752</option>
+          <option value="3">680 x 750</option>
+          <option value="3">720 x 1020</option>
+      </param>
+      <param type="optiongroup" name="q_04im_00_orient" appearance="combo"
+        gui-text="Grain orientation:">
+          <option value="0">[ automatic ]</option>
+          <option value="1">Long</option>
+          <option value="2">Short</option>
+      </param>
+      </hbox>
+      <spacer size="16" />
+
     </page>
 
 <!-- ======================================== !-->
