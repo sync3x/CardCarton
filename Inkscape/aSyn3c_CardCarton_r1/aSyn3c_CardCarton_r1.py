@@ -631,7 +631,7 @@ class aSyn3c91(_inx.Effect):
             __.z1carton['FlapHeight'][iz] = (
                 (__.z1carton['Leng'][iz] / 2) if
                 (__.z1carton['Leng'][iz] / 2) < (__.z1carton['Widt'][iz]) else
-                (__.z1carton['Widt'][iz] / 1)
+                (__.z1carton['Widt'][iz] / 1) - (__._['q_tab_dust_flap_reduction'] / 2)
             )
 
             # offset
@@ -979,14 +979,14 @@ class aSyn3c91(_inx.Effect):
                          __.z1carton['GRID'][iz][2][1] - __._geom_['q_flap']['inn']['y'][2], ],
                         [0, 'L', __.z1carton['GRID'][iz][2][0] + __._['q_tab_dust_seam_reduction'] +
                          __._geom_['q_flap']['out']['x'][3],
-                         __.z1carton['GRID'][iz][2][1] + __._geom_['q_flap']['inn']['y'][3] - __.z1carton['FlapHeight'][
-                             iz], ],
+                         __.z1carton['GRID'][iz][2][1] + __._geom_['q_flap']['inn']['y'][3]
+                         - __.z1carton['FlapHeight'][iz], ],
                     ],
                     'A2o1': [
                         [0x2802],
                         [0, 'L', __.z1carton['GRID'][iz][3][0] - __._geom_['q_flap']['inn']['x'][2],
-                         __.z1carton['GRID'][iz][2][1] + __._geom_['q_flap']['out']['y'][3] - __.z1carton['FlapHeight'][
-                             iz], ],
+                         __.z1carton['GRID'][iz][2][1] + __._geom_['q_flap']['out']['y'][3]
+                         - __.z1carton['FlapHeight'][iz], ],
                         [0, 'L', __.z1carton['GRID'][iz][3][0] - __._geom_['q_flap']['inn']['x'][2],
                          __.z1carton['GRID'][iz][2][1] - __._geom_['q_flap']['out']['y'][2], ],
                         [0, 'L', __.z1carton['GRID'][iz][3][0] - __._geom_['q_flap']['inn']['x'][1],
@@ -2559,6 +2559,7 @@ class aSyn3c91(_inx.Effect):
         pars.add_argument('--q_01pc_u1_00_base_o', type=str, help='base-orient')
         pars.add_argument('--q_01pc_u1_00_hang', type=int, help='hang')
         pars.add_argument('--q_01pc_u1_00_flap', type=int, help='flap')
+        pars.add_argument('--q_01pc_u1_00_strain', type=int, help='flap')
 
         pars.add_argument('--q_01pc_u1_window_001', type=float, help='L')
         pars.add_argument('--q_01pc_u1_window_002', type=float, help='H')
@@ -2633,6 +2634,7 @@ class aSyn3c91(_inx.Effect):
         pars.add_argument('--q_01pc_u2_00_base_o', type=str, help='base-orient')
         pars.add_argument('--q_01pc_u2_00_hang', type=int, help='hang')
         pars.add_argument('--q_01pc_u2_00_flap', type=int, help='flap')
+        pars.add_argument('--q_01pc_u2_00_strain', type=int, help='strain')
 
         pars.add_argument('--q_01pc_u2_window_001', type=float, help='L')
         pars.add_argument('--q_01pc_u2_window_002', type=float, help='H')
@@ -2912,6 +2914,7 @@ class aSyn3c91(_inx.Effect):
             'Base': [__._['q_01pc_u1_00_base'], __._['q_01pc_u2_00_base'], ],
             'Hang': [__._['q_01pc_u1_00_hang'], __._['q_01pc_u2_00_hang'], ],
             'Flap': [__._['q_01pc_u1_00_flap'], __._['q_01pc_u2_00_flap'], ],
+            'Strain': [__._['q_01pc_u1_00_strain'], __._['q_01pc_u2_00_strain'], ],
             'LiddOrient': [__._['q_01pc_u1_00_lidd_o'], __._['q_01pc_u2_00_lidd_o'], ],
             'BaseOrient': [__._['q_01pc_u1_00_base_o'], __._['q_01pc_u2_00_base_o'], ],
             'Window':
@@ -3087,30 +3090,35 @@ class aSyn3c91(_inx.Effect):
 
         ##
         ## StyleSheet
+        ##https://graphicdesign.stackexchange.com/questions/132684/how-to-make-dashed-stroke-constant
         __._stylesheet_ = {
             # fold style
             'q_fold_base': {  # the four fixed sides
                 'stroke': __._['q_col1_cre5'],  # '#00FFFF', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # very legible but not obstructing background
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             'q_fold_glue_tab': {  # the one glue tab
                 'stroke': __._['q_col1_cre4'],  # '#406080', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # very legible but not obstructing background
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             'q_fold_hinge': {  # the two moving lid hinges
                 'stroke': __._['q_col1_cre6'],  # '#00FFC0', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # legible but distinct from base/permanent fold
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             'q_fold_lid_tab': {  # the opposite ends of two lid hinges
                 'stroke': __._['q_col1_cre7'],  # '#00C0E0', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # legible but distinct from base/permanent fold
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             # Window fold (for 1-piece substitue for an insert)
@@ -3118,6 +3126,7 @@ class aSyn3c91(_inx.Effect):
                 'stroke': __._['q_col1_cre9'],  # '#00C0E0', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # legible but distinct from base/permanent fold
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             # Insert fold
@@ -3125,6 +3134,7 @@ class aSyn3c91(_inx.Effect):
                 'stroke': __._['q_col1_creA'],  # '#00C0E0', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # legible but distinct from base/permanent fold
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             # Regular Slotted Shipping Container fold
@@ -3132,6 +3142,7 @@ class aSyn3c91(_inx.Effect):
                 'stroke': __._['q_col1_cre1'],  # '#00C0E0', # Cyan Crease
                 'stroke-width': __._['q_col1_cre2'],  # thick crease line
                 'stroke-opacity': __._['q_col1_cre3'],  # legible but distinct from base/permanent fold
+                'stroke-dasharray': '7,2,2,2',  # dash pattern in crease line
                 'fill': 'none'
             },
             # chop style

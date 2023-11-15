@@ -21,7 +21,7 @@
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <!--= my guide: https://www.linux-magazine.com/Issues/2020/239/Magic-Circle ==-->
   <name>CardCarton rev.1</name>
-  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.11.12</id>
+  <id>net.asyn3c.inkscape.carton.rev.0001.ver.2023.11.15</id>
 
   <param type="int"
    name="historyfader01"
@@ -540,11 +540,20 @@
 		  <option value="R">Reverse</option>
 	      </param>
 	      </vbox>
+	      <vbox>
 	      <param type="optiongroup" name="q_01pc_u1_00_flap" appearance="combo"
 		gui-text="Flap:">
 		  <option value="0">Flush</option>
 		  <option value="1">Relief</option>
 	      </param>
+	      <param type="optiongroup" name="q_01pc_u1_00_strain" appearance="combo"
+		gui-text="Strain:">
+		  <option value="0">Sharp Edge</option>
+		  <option value="1">1mm Radial</option>
+		  <option value="2">2mm Radial</option>
+		  <option value="3">3mm Radial</option>
+	      </param>
+	      </vbox>
 	      <param type="optiongroup" name="q_01pc_u1_00_hang" appearance="combo"
 		gui-text="Hanger:">
 		  <option value="0">No</option>
@@ -931,11 +940,20 @@
 		  <option value="R">Reverse</option>
 	      </param>
 	      </vbox>
+	      <vbox>
 	      <param type="optiongroup" name="q_01pc_u2_00_flap" appearance="combo"
 		gui-text="Flap:">
 		  <option value="0">Flush</option>
 		  <option value="1">Relief</option>
 	      </param>
+	      <param type="optiongroup" name="q_01pc_u2_00_strain" appearance="combo"
+		gui-text="Strain:">
+		  <option value="0">Sharp Edge</option>
+		  <option value="1">1mm Radial</option>
+		  <option value="2">2mm Radial</option>
+		  <option value="3">3mm Radial</option>
+	      </param>
+	      </vbox>
 	      <param type="optiongroup" name="q_01pc_u2_00_hang" appearance="combo"
 		gui-text="Hanger:">
 		  <option value="0">No</option>
